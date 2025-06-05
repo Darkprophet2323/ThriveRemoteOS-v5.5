@@ -1461,7 +1461,7 @@ async def get_live_jobs():
     # Combine real jobs with curated ones
     all_jobs = jobs + curated_jobs
     
-    return {"jobs": all_jobs, "total": len(all_jobs), "source": "live_multi_source_mongodb"}
+    return {"success": True, "jobs": all_jobs, "total": len(all_jobs), "source": "live_multi_source_mongodb"}
 
 @app.get("/api/dashboard/live-stats")
 async def get_live_dashboard_stats():
