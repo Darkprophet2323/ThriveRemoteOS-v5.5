@@ -1529,6 +1529,7 @@ async def get_dashboard_stats(session_token: str = None):
 async def get_ai_tools():
     """Get comprehensive AI tools for job applications"""
     ai_tools = {
+        "success": True,
         "categories": {
             "ai_automation": {
                 "name": "AI Automation",
