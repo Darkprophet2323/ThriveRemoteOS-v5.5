@@ -94,6 +94,64 @@ body {
   z-index: 1;
 }
 
+/* ===== PROFESSIONAL NEWS TICKER ===== */
+.professional-news-ticker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: var(--backdrop-blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  font-size: 0.75rem;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.ticker-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.system-metrics {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: var(--accent-blue);
+  color: var(--white-pure);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  min-width: 250px;
+  height: 100%;
+  font-size: 0.7rem;
+}
+
+.news-scroll {
+  display: flex;
+  align-items: center;
+  color: var(--silver-accent);
+  padding-left: 16px;
+  animation: scrollText 60s linear infinite;
+  white-space: nowrap;
+}
+
+.news-item {
+  margin-right: 32px;
+  font-weight: 500;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
 /* ===== SLEEK NEWS TICKER ===== */
 .news-ticker {
   position: fixed;
