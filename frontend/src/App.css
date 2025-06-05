@@ -894,6 +894,68 @@ body {
   box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.1);
 }
 
+/* ===== BOOT SCREEN ===== */
+.boot-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  color: var(--white-pure);
+}
+
+.boot-logo {
+  font-size: 4rem;
+  margin-bottom: 24px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.boot-text {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.boot-subtitle {
+  font-size: 1rem;
+  color: var(--silver-accent);
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.boot-progress {
+  width: 300px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.boot-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-blue), #00a8ff);
+  border-radius: 2px;
+  animation: loadingBar 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes loadingBar {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+
 /* ===== UTILITY CLASSES ===== */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
