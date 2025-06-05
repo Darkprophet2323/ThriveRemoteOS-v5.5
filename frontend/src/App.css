@@ -158,6 +158,16 @@ body {
   z-index: 10;
 }
 
+.desktop-grid {
+  position: absolute;
+  top: 50px;
+  left: 24px;
+  display: grid;
+  grid-template-columns: repeat(6, 80px);
+  gap: 20px;
+  z-index: 10;
+}
+
 .desktop-icon {
   display: flex;
   flex-direction: column;
