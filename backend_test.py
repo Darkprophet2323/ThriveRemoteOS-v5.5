@@ -7,7 +7,8 @@ from datetime import datetime
 class ThriveRemoteOSAPITester(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(ThriveRemoteOSAPITester, self).__init__(*args, **kwargs)
-        self.base_url = "https://9eeca980-93df-4ede-a6ac-43058c6a0406.preview.emergentagent.com/api"
+        # Use the correct backend URL from frontend/.env
+        self.base_url = "https://6fdeb0af-cffd-41a8-8922-c43506e56eae.preview.emergentagent.com/api"
         self.tests_run = 0
         self.tests_passed = 0
 
@@ -244,6 +245,64 @@ class ThriveRemoteOSAPITester(unittest.TestCase):
         
         print(f"AI Tools - Total: {data.get('total_tools')}, Categories: {data.get('total_categories')}")
 
+    def test_jobs_live(self):
+        """Test the live jobs API endpoint"""
+        response = requests.get(f"{self.base_url}/jobs/live")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data.get("success"))
+        self.assertIn("jobs", data)
+        self.assertIn("total", data)
+        
+        jobs = data.get("jobs", [])
+        self.assertGreater(len(jobs), 0)
+        
+        # Check job structure
+        first_job = jobs[0]
+        self.assertIn("id", first_job)
+        self.assertIn("title", first_job)
+        self.assertIn("company", first_job)
+        self.assertIn("location", first_job)
+        
+        print(f"Live Jobs: {len(jobs)} jobs available")
+        print(f"First job: {first_job.get('title')} at {first_job.get('company')}")
+
+    def test_music_playlist(self):
+        """Test the music playlist API endpoint"""
+        response = requests.get(f"{self.base_url}/music/playlist")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data.get("success"))
+        self.assertIn("playlist", data)
+        
+        playlist = data.get("playlist", [])
+        self.assertGreater(len(playlist), 0)
+        
+        # Check track structure
+        first_track = playlist[0]
+        self.assertIn("id", first_track)
+        self.assertIn("title", first_track)
+        self.assertIn("artist", first_track)
+        self.assertIn("album", first_track)
+        self.assertIn("duration", first_track)
+        
+        print(f"Music Playlist: {len(playlist)} tracks available")
+        print(f"First track: {first_track.get('title')} by {first_track.get('artist')}")
+
+    def test_virtual_pets(self):
+        """Test the virtual pets API endpoint"""
+        response = requests.get(f"{self.base_url}/virtual-pets")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertIn("message", data)
+        self.assertIn("pets", data)
+        
+        pets = data.get("pets", {})
+        self.assertGreater(len(pets), 0)
+        
+        print(f"Virtual Pets: {len(pets)} pet types available")
+        print(f"Message: {data.get('message')}")
+
 def run_tests():
     # Create a test suite
     suite = unittest.TestSuite()
@@ -258,6 +317,9 @@ def run_tests():
     suite.addTest(ThriveRemoteOSAPITester('test_dashboard_stats'))
     suite.addTest(ThriveRemoteOSAPITester('test_dashboard_live_stats'))
     suite.addTest(ThriveRemoteOSAPITester('test_content_ai_tools'))
+    suite.addTest(ThriveRemoteOSAPITester('test_jobs_live'))
+    suite.addTest(ThriveRemoteOSAPITester('test_music_playlist'))
+    suite.addTest(ThriveRemoteOSAPITester('test_virtual_pets'))
     
     # Create a test runner
     runner = unittest.TextTestRunner(verbosity=2)
